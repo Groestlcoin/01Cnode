@@ -1,6 +1,6 @@
 'use strict';
 
-var bitcoind = require("express").Router();
+var groestlcoind = require("express").Router();
 var config = require("config");
 var Promise = require("bluebird");
 var bitcoinRPC = require("node-bitcoin-rpc");
@@ -12,7 +12,7 @@ Promise.promisifyAll(getSize);
 
 bitcoinRPC.init(config.get('RPC.host'), config.get('RPC.port'), config.get('RPC.rpc_username'), config.get('RPC.rpc_password'));
 
-bitcoind.get("/status", function(req, res){
+groestlcoind.get("/status", function(req, res){
 	var info = {
 		arch: os.arch(),
 		cpus: os.cpus(),
@@ -25,7 +25,7 @@ bitcoind.get("/status", function(req, res){
 		networkInterfaces: os.networkInterfaces(),
 		loadavg: os.loadavg()
 	};
-  getSize(config.get('Bitcoin.homeDir'), function(error,size){
+  getSize(config.get('Groestlcoin.homeDir'), function(error,size){
       if(!error){
           info.blockchainSize = size;
           res.status(200).json(info).end();
@@ -36,7 +36,7 @@ bitcoind.get("/status", function(req, res){
 
 config.get('Api.restCalls').forEach(function(entry){
 
-    bitcoind.get(entry.uri, function(req, res) {
+    groestlcoind.get(entry.uri, function(req, res) {
         var inputString = [];
         if(entry.inputType === 'string'){
             inputString.push(req.params[entry.inputName]);
@@ -61,4 +61,4 @@ config.get('Api.restCalls').forEach(function(entry){
     })
 });
 
-module.exports = bitcoind;
+module.exports = groestlcoind;

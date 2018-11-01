@@ -1,23 +1,11 @@
 var should = require("should");
 var request = require("supertest");
 var config = require("config");
-var _ = require("underscore");
 
-describe('bitcoind rpc call restful API routing tests:', function(){
-	describe('/api/bitcoind/getmempoolentry/:hash tests:', function(done){
-		var url = "http://localhost:" + config.get('Web.port');
-		var route;
-		before('we retrieve the url hash first', function(done){
-			request(url)
-			.get('/api/bitcoind/getrawmempool')
-			.expect(200)
-			.end(function(err, res){
-				hash = _.clone(res.body[0]);
-				route = "/api/bitcoind/getmempoolentry/" + hash;
-				done();
-			});
-		});
-		
+describe('groestlcoind rpc call restful API routing tests:', function(){
+var url = "http://localhost:" + config.get('Web.port');
+	describe('/api/groestlcoind/getnetworkinfo tests:', function(done){
+		var route = "/api/groestlcoind/getnetworkinfo";
 		it('should throw when incoret route given', function(done){
 			request(url)
 			.get("/something/bad")
@@ -45,38 +33,27 @@ describe('bitcoind rpc call restful API routing tests:', function(){
 				done();
 			});
 		});
-		it('returned json object should have attribute size', function(done){
+		it('returned json object should contain an attribute networks, which is an array', function(done){
 			request(url)
 			.get(route)
 			.set('Accept', 'application/json')
 			.expect('Content-Type', /json/)
 			.expect(200)
 			.end(function(err, res){
-				res.body.size.should.not.be.null()
+				res.body.networks.should.be.an.Array();
 				done();
-			});
+			})
 		});
-		it('returned json object should have attribute fee ', function(done){
+		it('returned json object should contain an attribute localaddresses, which is an array', function(done){
 			request(url)
 			.get(route)
 			.set('Accept', 'application/json')
 			.expect('Content-Type', /json/)
 			.expect(200)
 			.end(function(err, res){
-				res.body.fee.should.not.be.null()
+				res.body.localaddresses.should.be.an.Array();
 				done();
-			});
-		});
-		it('returned json object should have attribute depends', function(done){
-			request(url)
-			.get(route)
-			.set('Accept', 'application/json')
-			.expect('Content-Type', /json/)
-			.expect(200)
-			.end(function(err, res){
-				res.body.depends.should.not.be.null()
-				done();
-			});
+			})
 		});
 	});
 });

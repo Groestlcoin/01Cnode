@@ -4,26 +4,26 @@ Web:
 
 Client:
   appName: raspinodemon
-  apiUrlStart: "/api/bitcoind"
-  pageName: "my bitcoin fullnode"
+  apiUrlStart: "/api/groestlcoind"
+  pageName: "my groestlcoin fullnode"
 
 RPC:
   host: localhost
-  port: 8332
+  port: 1441
   rpc_username: <some username>
   rpc_password: <a very secret password>
   concurrency: 100
 
 Zmq:
-  socket: "tcp://127.0.0.1:28332"
+  socket: "tcp://127.0.0.1:21441"
   events:
     - "hashblock"
     - "hashtx"
     - "rawblock"
     - "rawtx"
-    
-Bitcoin:
-  homeDir: '~/.bitcoin'
+
+Groestlcoin:
+  homeDir: '~/.groestlcoin'
 
 Api:
   restCalls:

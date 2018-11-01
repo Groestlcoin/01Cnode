@@ -16,7 +16,7 @@ var compression = require("compression");
 var fs = require("fs");
 var path = require("path");
 var logFile = path.join(__dirname, "server.log");
-var bjs = require('bitcoinjs-lib');
+var bjs = require('groestlcoinjs-lib');
 var Promise = require('bluebird');
 var Queue = require('simple-promise-queue');
 Queue.setPromise(require('bluebird'));
@@ -104,7 +104,7 @@ sock.on('message', function(topic, message) {
                     tx.outs.forEach(function (out) {
                       totalSent += out.value;
                     })
-                    totalSent = (totalSent / 100000000).toFixed(8); //we convert satoshi to BTC
+                    totalSent = (totalSent / 100000000).toFixed(8); //we convert gro to GRS
                     io.emit(topic.toString(),{
                         txid: tx.getId(),
                         totalSent: totalSent,

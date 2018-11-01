@@ -1,7 +1,7 @@
 {
   "name": "01Cnode",
   "version": "0.1.10",
-  "description": "web frontend for bitcoind, a decentralised block explorer",
+  "description": "web frontend for groestlcoind, a decentralised block explorer",
   "main": "server.js",
   "scripts": {
     "test": "find ./tests -name '*.js' | xargs -n 1 ./node_modules/mocha/bin/mocha -R spec",
@@ -12,13 +12,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/KanoczTomas/01Cnode.git"
+    "url": "https://github.com/Groestlcoin/01Cnode.git"
   },
   "keywords": [
-    "bitcoin",
+    "groestlcoin",
     "angularjs",
     "mempool",
-    "bitcoin-node",
+    "groestlcoin-node",
     "realtime",
     "blockexplorer",
     "zeromq",
@@ -37,7 +37,7 @@
     "angular": "^1.7.2",
     "angular-socket-io": "^0.7.0",
     "async-work-queue": "^0.3.0",
-    "bitcoinjs-lib": "^4.0.1",
+    "groestlcoinjs-lib": "https://github.com/Groestlcoin/groestlcoinjs-lib.git",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "buffer": "^5.1.0",

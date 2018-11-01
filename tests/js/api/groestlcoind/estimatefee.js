@@ -2,10 +2,10 @@ var should = require("should");
 var request = require("supertest");
 var config = require("config");
 
-describe('bitcoind rpc call restful API routing tests:', function(){
+describe('groestlcoind rpc call restful API routing tests:', function(){
 var url = "http://localhost:" + config.get('Web.port');
-	describe('/api/bitcoind/estimatefee/:nblocks tests:', function(done){
-		var route = "/api/bitcoind/estimatefee/3";
+	describe('/api/groestlcoind/estimatefee/:nblocks tests:', function(done){
+		var route = "/api/groestlcoind/estimatefee/3";
 		it('should throw when incoret route given', function(done){
 			request(url)
 			.get("/something/bad")

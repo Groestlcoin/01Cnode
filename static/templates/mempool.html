@@ -9,15 +9,15 @@
             <th>amount sent</th>
             <th>size</th>
             <th>weight</th>
-            <th>fee [sat/B]</th>
-            <th>fee [sat/WU]</th>
+            <th>fee [gro/B]</th>
+            <th>fee [gro/WU]</th>
             <th>segWit?</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-class="setCSSanimation($index)" ng-repeat="tx in txes">
             <td>{{tx.txid}}</td>
-            <td>{{tx.totalSent}} BTC</td>
+            <td>{{tx.totalSent}} GRS</td>
             <td>{{tx.byteLength | bytes:'SIbytes.dynamic'}}</td>
             <td>{{tx.weight | bytes:'WU.dynamic' }}</td>
             <td>{{(tx.fee/tx.byteLength).toFixed(2)}}</td>

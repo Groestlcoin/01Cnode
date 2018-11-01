@@ -7,8 +7,8 @@ var EventEmitter = require("events");
 var sinon = require("sinon");
 var proxyquire = require("proxyquire");
 require("../angular-helper");
-proxyquire("../../../js/controllers/mempoolCtrl", { 
-    'bitcoinjs-lib': {
+proxyquire("../../../js/controllers/mempoolCtrl", {
+    'groestlcoinjs-lib': {
         Transaction: {
             fromHex: function(data){
                 return {
@@ -47,9 +47,9 @@ util.inherits(SocketIO, EventEmitter);//we want it to have events
 describe('mempoolCtrl', function(){
     var $httpBackend, $rootScope, createController, state = "mempool", $state;
     var scope, socketio;
-    
+
     beforeEach(ngModule(config.get('Client.appName')));
-    
+
     beforeEach(ngModule(function($provide){
         $provide.factory('socketio', function(){
             return new SocketIO();
@@ -59,7 +59,7 @@ describe('mempoolCtrl', function(){
 //        });//had to mock $location, otherwise the tests were throwing $digest errors
         // see http://stackoverflow.com/questions/27383531/unit-tests-fail-with-digest-iterations-loop-after-update-to-1-3-4
     }));
-    
+
     beforeEach(inject(function ($injector){
         $httpBackend = $injector.get('$httpBackend');
         $rootScope = $injector.get('$rootScope');
@@ -75,7 +75,7 @@ describe('mempoolCtrl', function(){
             });
         };
         createController(scope);
-        
+
         $httpBackend.whenGET(config.get('Client.apiUrlStart') + '/getmempoolinfo')
         .respond({
             size: 1000,
@@ -83,17 +83,17 @@ describe('mempoolCtrl', function(){
         });
         $httpBackend.flush();//when called all $http.get methods fire in the controller and return mocked responses
     }));
-    
-        
+
+
     afterEach(function(){
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
     });
-    
+
     it('should GET ' + config.get('Client.apiUrlStart') + '/getmempoolinfo', function(){
         //all handled in before hooks
     });
-    
+
     it('state should be mempool', function(){
         $state.current.name.should.be.equal(state);
     });
@@ -111,7 +111,7 @@ describe('mempoolCtrl', function(){
         scope.showN.should.be.a.Number();
     });
     it('$scope.setCSSanimation() should return empty string when index out of range', function(){
-    
+
         scope.setCSSanimation(11).should.be.equal('');
         scope.setCSSanimation(-5).should.be.equal('');
         scope.showN = 20;
@@ -140,7 +140,7 @@ describe('mempoolCtrl', function(){
         scope.txes.length.should.be.equal(0);
         var data = {data: 'test'};
         for(var i = 0; i<scope.showN+1;i++){
-            scope.rawtxListener(data);    
+            scope.rawtxListener(data);
             scope.txes.length.should.be.equal(i+1);
         }
         scope.rawtxListener(data);
@@ -160,12 +160,12 @@ describe('mempoolCtrl', function(){
         scope.mempoolEntry.size.should.be.equal(1003);
         scope.mempoolEntry.bytes.should.be.equal(38);
         scope.mempoolEntry.fitsToHowManyBlocks.should.be.equal(1);
-        
+
     });
     it('txid property of tx within $scope.rawtxListener should be set correctly', function(){
         scope.rawtxListener({data: 'test'});
         scope.txes[0].txid.should.be.equal('test');
-        
+
     });
     it('transaction on a rawtx event should go to position 0', function(){
         scope.txes.length.should.be.equal(0);
@@ -174,7 +174,7 @@ describe('mempoolCtrl', function(){
         scope.rawtxListener({data: 'id 2'});
         scope.txes[0].txid.should.be.equal('id 2');
         scope.txes[1].txid.should.not.be.equal('id 2');
-        
+
     });
     it('should call $scope.loadMempool() when hashblock event received', function(){
         var loadMempool = sinon.stub(scope, "loadMempool").returns(true);
@@ -210,28 +210,3 @@ describe('mempoolCtrl', function(){
         loadMempool.restore();
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,10 +2,10 @@ var should = require("should");
 var request = require("supertest");
 var config = require("config");
 
-describe('bitcoind rpc call restful API routing tests:', function(){
+describe('groestlcoind rpc call restful API routing tests:', function(){
 var url = "http://localhost:" + config.get('Web.port');
-	describe('/api/bitcoind/getrawmempool tests:', function(done){
-		var route = "/api/bitcoind/getrawmempool";
+	describe('/api/groestlcoind/getblockhash/:index tests:', function(done){
+		var route = "/api/groestlcoind/getblockhash/5";
 		it('should throw when incoret route given', function(done){
 			request(url)
 			.get("/something/bad")
@@ -22,27 +22,27 @@ var url = "http://localhost:" + config.get('Web.port');
 			.expect('Content-Type', /json/)
 			.expect(200,done);
 		});
-		it('should return an Array ', function(done){
+		it('should return a string', function(done){
 			request(url)
 			.get(route)
 			.set('Accept', 'application/json')
 			.expect('Content-Type', /json/)
 			.expect(200)
 			.end(function(err, res){
-				res.body.should.be.an.Array()
+				res.body.should.be.a.String()
 				done();
 			});
 		});
-		it('Array member should be a string', function(done){
+		it('returned blockHash of index 5 should be equal 000000009b7262315dbf071787ad3656097b892abffd1f95a1a022f896f533fc' , function(done){
 			request(url)
 			.get(route)
 			.set('Accept', 'application/json')
 			.expect('Content-Type', /json/)
 			.expect(200)
 			.end(function(err, res){
-				res.body[0].should.be.String()
+				res.body.should.be.a.equal('000000009b7262315dbf071787ad3656097b892abffd1f95a1a022f896f533fc');
 				done();
-			});
+			})
 		});
 	});
 });
