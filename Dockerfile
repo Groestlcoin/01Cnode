@@ -1,5 +1,5 @@
 FROM node:8
-WORKDIR /bitcoin
+WORKDIR /groestlcoin
 WORKDIR /opt/01cnode
 COPY package*.json ./
 RUN npm install

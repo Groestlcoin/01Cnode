@@ -4,8 +4,8 @@ Web:
 
 Client:
   appName: 01cnode
-  apiUrlStart: "/api/bitcoind"
-  pageName: "my bitcoin fullnode"
+  apiUrlStart: "/api/groestlcoind"
+  pageName: "my groestlcoin fullnode"
 
 RPC:
   host: 172.17.0.1
@@ -15,15 +15,15 @@ RPC:
   concurrency: 100
 
 Zmq:
-  socket: "tcp://172.17.0.1:28332"
+  socket: "tcp://172.17.0.1:21441"
   events:
     - "hashblock"
     - "hashtx"
     - "rawblock"
     - "rawtx"
-    
-Bitcoin:
-  homeDir: '/bitcoin'
+
+Groestlcoin:
+  homeDir: '/groestlcoin'
 
 Api:
   restCalls:
