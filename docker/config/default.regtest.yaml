@@ -4,26 +4,26 @@ Web:
 
 Client:
   appName: 01cnode
-  apiUrlStart: "/api/groestlcoind"
-  pageName: "my groestlcoin fullnode"
+  apiUrlStart: "/api/bitcoind"
+  pageName: "my bitcoin fullnode"
 
 RPC:
-  host: localhost
-  port: 1441
-  rpc_username: <some username>
-  rpc_password: <a very secret password>
+  host: 172.17.0.1
+  port: 18443
+  rpc_username: secretuser
+  rpc_password: secretpass
   concurrency: 100
 
 Zmq:
-  socket: "tcp://127.0.0.1:21441"
+  socket: "tcp://172.17.0.1:28332"
   events:
     - "hashblock"
     - "hashtx"
     - "rawblock"
     - "rawtx"
-
-Groestlcoin:
-  homeDir: '~/.groestlcoin'
+    
+Bitcoin:
+  homeDir: '/bitcoin'
 
 Api:
   restCalls:
